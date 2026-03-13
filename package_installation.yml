@@ -1,0 +1,40 @@
+---
+- name: To install packages
+  hosts: all
+  become: true
+  tasks:
+    - name: Install git
+      package:
+        name: git
+        state: installed
+      notify: install git
+
+    - name: Install httpd
+      yum:
+        name: httpd
+        state: present
+      when: ansible_os_family == "RedHat"
+      notify: install httpd
+
+    - name: Install apache2
+      package:
+        name: apache2
+        state: installed
+      when: ansible_os_family == "Debian"
+
+    - name: copy index file
+      copy:
+        src: /home/ansadmin/index.html
+        dest: /var/www/html
+        mode: 0666
+
+
+  handlers:
+    - name: install git
+      service:
+       name: git
+       state: started
+    - name: install httpd
+      service: 
+       name: httpd
+       state: started

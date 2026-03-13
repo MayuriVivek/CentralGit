@@ -1,0 +1,14 @@
+---
+- name: copy file
+  hosts: all
+  become: true
+  tasks:
+    - name: copy file3 from dir1
+      copy:
+        src: /home/ansadmin/dir1/file3
+        dest: /home/ansadmin
+        remote_src: yes
+    - name: create another file
+      file:
+        path: /home/ansadmin/dir1/file4
+        state: touch

@@ -1,0 +1,7 @@
+---
+ - name: Test playbook
+   hosts: all
+   become: true
+   tasks:
+     - name: delete user sai
+       user: name=Sai state=absent

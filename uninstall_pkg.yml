@@ -1,0 +1,9 @@
+---
+- name: Uninstall pkg
+  hosts: all
+  become: true
+  tasks:
+    - name: remove packages
+      package:
+        name: ['git','make','httpd*','tree','apache2*']
+        state: absent

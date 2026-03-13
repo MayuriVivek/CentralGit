@@ -1,0 +1,15 @@
+---
+- name: create multiple user
+  hosts: all
+  become: true
+  tasks:
+    - name: add list of users
+      user:
+        name: "{{item}}"
+        state: present
+      loop:
+        - Raj
+        - sai
+        - Viraj
+
+
